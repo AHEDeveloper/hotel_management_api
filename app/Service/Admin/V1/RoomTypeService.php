@@ -4,7 +4,7 @@ namespace App\Service\Admin\V1;
 
 use Illuminate\Support\Facades\Validator;
 
-class RoomTypeAdmin
+class RoomTypeService
 {
     public static function validation($request)
     {
@@ -57,4 +57,5 @@ class RoomTypeAdmin
             ]
         );
     }
+
 }
