@@ -32,7 +32,7 @@ class RoomTypeAdmin extends Controller
 
     public function store(Request $request)
     {
-        $validation = Service::validation($request);
+        $validation = Service::validationStore($request);
 
         if ($validation->fails()) {
             return ApiResponseClass::apiResponse(false, 'Validation failed.', $validation->errors(), 422);
@@ -50,11 +50,15 @@ class RoomTypeAdmin extends Controller
 
     public function update(RoomType $roomType, Request $request)
     {
-        $validation = Service::validation($request);
+        $validation = Service::validationUpdate($request);
         if ($validation->fails()) {
             return ApiResponseClass::apiResponse(false, 'validation is fails', $validation->errors(), 422);
         }
-        $roomType->query()->update($request->all());
+        $roomType->update($request->only([
+            'name',
+            'capacity',
+            'price_per_night'
+        ]));
         return ApiResponseClass::apiResponse(true, 'Room type updated successfully', $roomType, 201);
     }
 

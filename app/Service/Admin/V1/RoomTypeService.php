@@ -6,56 +6,53 @@ use Illuminate\Support\Facades\Validator;
 
 class RoomTypeService
 {
-    public static function validation($request)
+    public static function validationStore($request)
     {
         return Validator::make(
             $request->all(),
             [
-                'name' => [
-                    'required',
-                    'string',
-                    'min:2',
-                    'max:100',
-                ],
-
-                'description' => [
-                    'nullable',
-                    'string',
-                    'max:1000',
-                ],
-
-                'capacity' => [
-                    'required',
-                    'integer',
-                    'min:1',
-                    'max:100',
-                ],
-
-                'price_per_night' => [
-                    'required',
-                    'integer',
-                    'min:0',
-                ],
+                'name' => ['required', 'string', 'max:255'],
+                'description' => ['nullable', 'string'],
+                'capacity' => ['required', 'integer', 'min:1'],
+                'price_per_night' => ['required', 'integer', 'min:0'],
             ],
             [
                 'name.required' => 'وارد کردن نام نوع اتاق الزامی است.',
                 'name.string' => 'نام نوع اتاق باید به صورت متن باشد.',
-                'name.min' => 'نام نوع اتاق باید حداقل ۲ کاراکتر باشد.',
-                'name.max' => 'نام نوع اتاق نمی‌تواند بیشتر از ۱۰۰ کاراکتر باشد.',
+                'name.max' => 'نام نوع اتاق نمی‌تواند بیشتر از ۲۵۵ کاراکتر باشد.',
 
                 'description.string' => 'توضیحات باید به صورت متن باشد.',
-                'description.max' => 'توضیحات نمی‌تواند بیشتر از ۱۰۰۰ کاراکتر باشد.',
 
-                'capacity.required' => 'وارد کردن ظرفیت اتاق الزامی است.',
-                'capacity.integer' => 'ظرفیت باید یک عدد صحیح باشد.',
-                'capacity.min' => 'ظرفیت اتاق باید حداقل ۱ نفر باشد.',
-                'capacity.max' => 'ظرفیت اتاق نمی‌تواند بیشتر از ۱۰۰ نفر باشد.',
+                'capacity.required' => 'وارد کردن ظرفیت الزامی است.',
+                'capacity.integer' => 'ظرفیت باید به صورت عدد صحیح باشد.',
+                'capacity.min' => 'ظرفیت نمی‌تواند کمتر از ۱ باشد.',
 
                 'price_per_night.required' => 'وارد کردن قیمت هر شب الزامی است.',
                 'price_per_night.integer' => 'قیمت هر شب باید به صورت عدد صحیح باشد.',
-                'price_per_night.min' => 'قیمت هر شب نمی‌تواند منفی باشد.',
+                'price_per_night.min' => 'قیمت هر شب نمی‌تواند کمتر از ۰ باشد.',
             ]
         );
     }
 
+    public static function validationUpdate($request)
+    {
+        return Validator::make(
+            $request->all(),
+            [
+                'name' => ['string', 'max:255'],
+                'description' => ['nullable', 'string'],
+                'capacity' => ['integer', 'min:1'],
+                'price_per_night' => ['integer', 'min:0'],
+            ],
+            [
+                'name.string' => 'نام نوع اتاق باید به صورت متن باشد.',
+                'name.max' => 'نام نوع اتاق نمی‌تواند بیشتر از ۲۵۵ کاراکتر باشد.',
+                'description.string' => 'توضیحات باید به صورت متن باشد.',
+                'capacity.integer' => 'ظرفیت باید به صورت عدد صحیح باشد.',
+                'capacity.min' => 'ظرفیت نمی‌تواند کمتر از ۱ باشد.',
+                'price_per_night.integer' => 'قیمت هر شب باید به صورت عدد صحیح باشد.',
+                'price_per_night.min' => 'قیمت هر شب نمی‌تواند کمتر از ۰ باشد.',
+            ]
+        );
+    }
 }
