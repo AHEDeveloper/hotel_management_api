@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\V1\AmenityAdmin;
 use App\Http\Controllers\Admin\V1\RoomAdmin;
 use App\Http\Controllers\Admin\V1\RoomImageAdmin;
 use App\Http\Controllers\Admin\V1\RoomTypeAdmin;
@@ -17,5 +18,6 @@ Route::prefix('v1/admin')->group(function (){
     });
 
     Route::post('/roomImage', [RoomImageAdmin::class,'store']);
+    Route::apiResource('/amenity', AmenityAdmin::class);
 });
 
