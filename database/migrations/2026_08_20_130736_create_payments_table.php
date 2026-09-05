@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('transaction_id')->nullable()->unique();
             $table->timestamp('paid_at')->nullable();
             $table->foreignId('reservation_id')->constrained()->cascadeOnDelete();
+
             $table->timestamps();
         });
     }

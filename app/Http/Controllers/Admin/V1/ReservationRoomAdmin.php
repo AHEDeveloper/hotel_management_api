@@ -19,7 +19,7 @@ class ReservationRoomAdmin extends Controller
                $this->transformRR($item)
                ];
         });
-        return ApiResponseClass::apiResponse(true,'get',[
+        return ApiResponseClass::apiResponse(true,'ReservationRoom retrieved successfully',[
             'items' => $items,
             'meta' => [
                 'total' => $RR->total(),
@@ -53,7 +53,7 @@ class ReservationRoomAdmin extends Controller
         }
 
         $reservationRoom->update($request->all());
-        return ApiResponseClass::apiResponse(true,'get',$this->transformRR($reservationRoom),200);
+        return ApiResponseClass::apiResponse(true,'ReservationRoom Updated successfully',$this->transformRR($reservationRoom),200);
     }
 
     public function delete(ReservationRoom $reservationRoom)
@@ -61,7 +61,7 @@ class ReservationRoomAdmin extends Controller
         if (!$reservationRoom) {
             return ApiResponseClass::errorResponse('not_found', 'ReservationRoom not found.', 404);
         }
-        return ApiResponseClass::apiResponse(true,'ReservationRoom Deleted',$reservationRoom->delete(),200);
+        return ApiResponseClass::apiResponse(true,'ReservationRoom Deleted successfully',$reservationRoom->delete(),200);
 
     }
 

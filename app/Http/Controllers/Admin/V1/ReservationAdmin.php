@@ -19,7 +19,7 @@ class ReservationAdmin extends Controller
                     $this->transformReservation($item)
               ];
         });
-        return ApiResponseClass::apiResponse(true,'get reservation',$items,200);
+        return ApiResponseClass::apiResponse(true,'Reservation retrieved successfully',$items,200);
     }
 
     public function show($id)
@@ -61,7 +61,7 @@ class ReservationAdmin extends Controller
         if (!$reservationFind) {
             return ApiResponseClass::errorResponse('not_found', 'Reservation not found.', 404);
         }
-        return ApiResponseClass::apiResponse(true,'Reservation Deleted',$reservation->delete(),200);
+        return ApiResponseClass::apiResponse(true,'Reservation deleted successfully',$reservation->delete(),200);
     }
 
     public function transformReservation($item)
