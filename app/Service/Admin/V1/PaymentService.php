@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Validator;
 
 class PaymentService
 {
-    public static function validationUpdate($request)
+    public static function validationUpdate($request,$payment)
     {
         return Validator::make($request->all(),[
             'reservation_id' => 'sometimes|exists:reservations,id',

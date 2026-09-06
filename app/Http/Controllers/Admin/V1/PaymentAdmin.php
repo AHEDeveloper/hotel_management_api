@@ -43,11 +43,11 @@ class PaymentAdmin extends Controller
         if (!$reservationFind) {
             return ApiResponseClass::errorResponse('not_found', 'Reservation not found.', 404);
         }
-
-        $validation = PaymentService::validationUpdate($request);
+        $validation = PaymentService::validationUpdate($request,$payment);
         if ($validation->fails()) {
             return ApiResponseClass::apiResponse(false, 'validation is fails', $validation->errors(), 422);
         }
+
         $payment->update($request->all());
         return ApiResponseClass::apiResponse(true,'payment updated successfully',$this->transformPayment($payment),200);
     }

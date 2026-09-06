@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\V1\ReservationRoomAdmin;
 use App\Http\Controllers\Admin\V1\RoomAdmin;
 use App\Http\Controllers\Admin\V1\RoomImageAdmin;
 use App\Http\Controllers\Admin\V1\RoomTypeAdmin;
+use App\Http\Controllers\Admin\V1\ServiceAdmin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,5 +26,6 @@ Route::prefix('v1/admin')->group(function (){
     Route::apiResource('/reservation', ReservationAdmin::class);
     Route::apiResource('/reservation_room', ReservationRoomAdmin::class);
     Route::apiResource('/payment', PaymentAdmin::class);
+    Route::apiResource('/service', ServiceAdmin::class);
 });
 
