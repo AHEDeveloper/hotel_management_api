@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\V1\PaymentAdmin;
 use App\Http\Controllers\Admin\V1\ReservationAdmin;
 use App\Http\Controllers\Admin\V1\ReservationRoomAdmin;
 use App\Http\Controllers\Admin\V1\ReservationServiceAdmin;
+use App\Http\Controllers\Admin\V1\ReviewAdmin;
 use App\Http\Controllers\Admin\V1\RoomAdmin;
 use App\Http\Controllers\Admin\V1\RoomImageAdmin;
 use App\Http\Controllers\Admin\V1\RoomTypeAdmin;
@@ -29,5 +30,6 @@ Route::prefix('v1/admin')->group(function (){
     Route::apiResource('/payment', PaymentAdmin::class);
     Route::apiResource('/service', ServiceAdmin::class);
     Route::apiResource('/reservation_service', ReservationServiceAdmin::class);
+    Route::apiResource('/review', ReviewAdmin::class);
 });
 
