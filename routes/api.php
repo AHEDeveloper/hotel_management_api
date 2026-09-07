@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\V1\AmenityAdmin;
+use App\Http\Controllers\Admin\V1\AmenityRoomAdmin;
 use App\Http\Controllers\Admin\V1\PaymentAdmin;
 use App\Http\Controllers\Admin\V1\ReservationAdmin;
 use App\Http\Controllers\Admin\V1\ReservationRoomAdmin;
@@ -16,14 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('v1/admin')->group(function (){
     Route::apiResource('/roomType', RoomTypeAdmin::class);
     Route::apiResource('/room', RoomAdmin::class);
-
     Route::prefix('room/{room}/gallery')->controller(RoomImageAdmin::class)->group(function (){
         Route::get('/','index');
         Route::post('/','store');
         Route::delete('/{image}','delete');
     });
-
-    Route::post('/roomImage', [RoomImageAdmin::class,'store']);
     Route::apiResource('/amenity', AmenityAdmin::class);
     Route::apiResource('/reservation', ReservationAdmin::class);
     Route::apiResource('/reservation_room', ReservationRoomAdmin::class);
@@ -31,5 +29,6 @@ Route::prefix('v1/admin')->group(function (){
     Route::apiResource('/service', ServiceAdmin::class);
     Route::apiResource('/reservation_service', ReservationServiceAdmin::class);
     Route::apiResource('/review', ReviewAdmin::class);
+    Route::apiResource('/amenity_room', AmenityRoomAdmin::class);
 });
 
