@@ -13,6 +13,7 @@ class RoomAdmin extends Controller
 {
     public function index()
     {
+
         $rooms = Room::query()->paginate(2);
         $items = collect($rooms->items())->map(function ($item){
            return [
