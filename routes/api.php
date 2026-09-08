@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\V1\AdminControllerAdmin;
 use App\Http\Controllers\Admin\V1\AmenityAdmin;
 use App\Http\Controllers\Admin\V1\AmenityRoomAdmin;
 use App\Http\Controllers\Admin\V1\PaymentAdmin;
@@ -30,5 +31,6 @@ Route::prefix('v1/admin')->group(function (){
     Route::apiResource('/reservation_service', ReservationServiceAdmin::class);
     Route::apiResource('/review', ReviewAdmin::class);
     Route::apiResource('/amenity_room', AmenityRoomAdmin::class);
+    Route::apiResource('/admin', AdminControllerAdmin::class);
 });
 
