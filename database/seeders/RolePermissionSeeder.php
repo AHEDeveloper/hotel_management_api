@@ -109,7 +109,7 @@ class RolePermissionSeeder extends Seeder
             // Rooms
             'create rooms', 'view rooms', 'update rooms', 'delete rooms',
             // Room Types
-            'create room types', 'view room types', 'update room types', 'delete room types',
+            'create room types', 'view room types', 'update room types', 'delete room types', 'create room images', 'view room images', 'update room images', 'delete room images',
         ]);
 
         $superAdminUser = Admin::query()->create([
