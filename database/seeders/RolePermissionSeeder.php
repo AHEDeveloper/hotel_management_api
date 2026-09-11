@@ -106,10 +106,31 @@ class RolePermissionSeeder extends Seeder
             'guard_name' => 'admin'
         ]);
         $roomAdmin->givePermissionTo([
-            // Rooms
             'create rooms', 'view rooms', 'update rooms', 'delete rooms',
-            // Room Types
-            'create room types', 'view room types', 'update room types', 'delete room types', 'create room images', 'view room images', 'update room images', 'delete room images',
+            'create room types', 'view room types', 'update room types', 'delete room types',
+            'create room images', 'view room images', 'update room images', 'delete room images',
+            'create amenities', 'view amenities', 'update amenities', 'delete amenities',
+            'create amenity rooms', 'view amenity rooms', 'update amenity rooms', 'delete amenity rooms',
+        ]);
+
+        $reservationAdmin = Role::query()->create([
+            'name' => 'reservation admin',
+            'guard_name' => 'admin'
+        ]);
+        $reservationAdmin->givePermissionTo([
+            'create reservations', 'view reservations', 'update reservations', 'delete reservations',
+            'create reservation rooms', 'view reservation rooms', 'update reservation rooms', 'delete reservation rooms',
+            'create payments', 'view payments', 'update payments', 'delete payments',
+            'create reservation services', 'view reservation services', 'update reservation services', 'delete reservation services',
+        ]);
+
+        $serviceAdmin = Role::query()->create([
+            'name' => 'service admin',
+            'guard_name' => 'admin'
+        ]);
+        $serviceAdmin->givePermissionTo([
+            'create reviews', 'view reviews', 'update reviews', 'delete reviews',
+            'create services', 'view services', 'update services', 'delete services',
         ]);
 
         $superAdminUser = Admin::query()->create([
@@ -126,5 +147,18 @@ class RolePermissionSeeder extends Seeder
         ]);
         $adminRoomUser->assignRole('room admin');
 
+        $reservationAdminUser = Admin::query()->create([
+            'name' => 'mahdi',
+            'email' => 'm@gmail.com',
+            'password' => bcrypt(1234),
+        ]);
+        $reservationAdminUser->assignRole('reservation admin');
+
+        $serviceAdminUser = Admin::query()->create([
+            'name' => 'hosein',
+            'email' => 'h@gmail.com',
+            'password' => bcrypt(1234)
+        ]);
+        $serviceAdminUser->assignRole('service admin');
     }
 }

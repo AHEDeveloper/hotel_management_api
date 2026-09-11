@@ -49,6 +49,7 @@ class AdminControllerAdmin extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
+        $admin->assignRole($request->role);
         return ApiResponseClass::apiResponse(true,'admin created successfully',$admin,201);
 
     }

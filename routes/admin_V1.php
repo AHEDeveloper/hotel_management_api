@@ -19,8 +19,6 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login',[AuthAdmin::class,'login'])->name('login');
 Route::middleware('auth:sanctum')->group(function (){
     Route::post('/logout',[AuthAdmin::class,'logout'])->name('logout');
-
-//    Route::middleware(['role:room admin','role:super admin'])->group(function (){
         Route::apiResource('/roomType', RoomTypeAdmin::class);
         Route::apiResource('/room', RoomAdmin::class);
         Route::prefix('room/{room}/gallery')->controller(RoomImageAdmin::class)->group(function (){
@@ -28,9 +26,6 @@ Route::middleware('auth:sanctum')->group(function (){
             Route::post('/','store');
             Route::delete('/{image}','delete');
         });
-//    });
-
-
     Route::apiResource('/amenity', AmenityAdmin::class);
     Route::apiResource('/reservation', ReservationAdmin::class);
     Route::apiResource('/reservation_room', ReservationRoomAdmin::class);
