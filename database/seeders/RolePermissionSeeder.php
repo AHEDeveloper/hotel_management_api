@@ -22,7 +22,7 @@ class RolePermissionSeeder extends Seeder
             'update rooms',
             'delete rooms',
 
-            // Room Types
+            // HomePage Types
             'create room types',
             'view room types',
             'update room types',
@@ -76,7 +76,7 @@ class RolePermissionSeeder extends Seeder
             'update amenity rooms',
             'delete amenity rooms',
 
-            // Room Images
+            // HomePage Images
             'create room images',
             'view room images',
             'update room images',

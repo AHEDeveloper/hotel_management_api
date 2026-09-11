@@ -88,7 +88,7 @@ Route::middleware('permission:update rooms')->put('/room/{room}', [RoomAdmin::cl
 Route::middleware('permission:delete rooms')->delete('/room/{room}', [RoomAdmin::class, 'destroy']);
 
 
-// Room Gallery
+// HomePage Gallery
 Route::middleware('permission:view room images')
     ->get('/room/{room}/gallery', [RoomImageAdmin::class, 'index']);
 
@@ -99,7 +99,7 @@ Route::middleware('permission:delete room images')
     ->delete('/room/{room}/gallery/{image}', [RoomImageAdmin::class, 'delete']);
 
 
-// Room Types
+// HomePage Types
 Route::middleware('permission:view room types')->get('/roomType', [RoomTypeAdmin::class, 'index']);
 Route::middleware('permission:create room types')->post('/roomType', [RoomTypeAdmin::class, 'store']);
 Route::middleware('permission:view room types')->get('/roomType/{roomType}', [RoomTypeAdmin::class, 'show']);

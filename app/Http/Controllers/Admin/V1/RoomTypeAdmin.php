@@ -16,7 +16,7 @@ class RoomTypeAdmin extends Controller
     {
         $roomTypes = RoomType::query()->paginate(2);
 
-        return ApiResponseClass::apiResponse(true, 'Room types retrieved successfully.', $roomTypes, 200);
+        return ApiResponseClass::apiResponse(true, 'HomePage types retrieved successfully.', $roomTypes, 200);
     }
 
     public function show($id)
@@ -24,10 +24,10 @@ class RoomTypeAdmin extends Controller
         $roomType = RoomType::find($id);
 
         if (!$roomType) {
-            return ApiResponseClass::errorResponse('not_found', 'Room type not found.', 404);
+            return ApiResponseClass::errorResponse('not_found', 'HomePage type not found.', 404);
         }
 
-        return ApiResponseClass::apiResponse(true, 'Room type retrieved successfully.', $roomType, 200);
+        return ApiResponseClass::apiResponse(true, 'HomePage type retrieved successfully.', $roomType, 200);
     }
 
     public function store(Request $request)
@@ -45,7 +45,7 @@ class RoomTypeAdmin extends Controller
             'price_per_night' => $request->price_per_night,
         ]);
 
-        return ApiResponseClass::apiResponse(true, 'Room type created successfully.', $roomType, 201);
+        return ApiResponseClass::apiResponse(true, 'HomePage type created successfully.', $roomType, 201);
     }
 
     public function update(RoomType $roomType, Request $request)
@@ -59,7 +59,7 @@ class RoomTypeAdmin extends Controller
             'capacity',
             'price_per_night'
         ]));
-        return ApiResponseClass::apiResponse(true, 'Room type updated successfully', $roomType, 201);
+        return ApiResponseClass::apiResponse(true, 'HomePage type updated successfully', $roomType, 201);
     }
 
     public function destroy($id)
@@ -68,7 +68,7 @@ class RoomTypeAdmin extends Controller
         if ($roomType == null) {
             return ApiResponseClass::errorResponse('not_found', 'roomType is empty', 404);
         }
-        return ApiResponseClass::apiResponse(true, 'Room type deleted successfully', $roomType->delete(), 200);
+        return ApiResponseClass::apiResponse(true, 'HomePage type deleted successfully', $roomType->delete(), 200);
     }
 
 }

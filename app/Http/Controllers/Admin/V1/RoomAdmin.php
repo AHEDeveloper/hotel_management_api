@@ -20,7 +20,7 @@ class RoomAdmin extends Controller
               $this->transformRoom($item)
            ];
         });
-        return ApiResponseClass::apiResponse(true, 'Room retrieved successfully.',[
+        return ApiResponseClass::apiResponse(true, 'HomePage retrieved successfully.',[
             'items' => $items,
             'meta' => [
                 'total' => $rooms->total(),
@@ -35,10 +35,10 @@ class RoomAdmin extends Controller
     {
         $room = Room::find($room->id);
         if (!$room) {
-            return ApiResponseClass::errorResponse('not_found', 'Room not found.', 404);
+            return ApiResponseClass::errorResponse('not_found', 'HomePage not found.', 404);
         }
 
-        return ApiResponseClass::apiResponse(true, 'Room retrieved successfully.', $this->transformRoom($room), 200);
+        return ApiResponseClass::apiResponse(true, 'HomePage retrieved successfully.', $this->transformRoom($room), 200);
     }
 
     public function transformRoom($item)
@@ -70,7 +70,7 @@ class RoomAdmin extends Controller
             'room_type_id' => $request->room_type_id,
         ]);
 
-        return ApiResponseClass::apiResponse(true, 'Room created successfully.', $this->transformRoom($room), 201);
+        return ApiResponseClass::apiResponse(true, 'HomePage created successfully.', $this->transformRoom($room), 201);
     }
 
     public function update(Room $room, Request $request)
@@ -85,7 +85,7 @@ class RoomAdmin extends Controller
             'status' ,
             'room_type_id'
         ]));
-        return ApiResponseClass::apiResponse(true, 'Room updated successfully', $this->transformRoom($room), 201);
+        return ApiResponseClass::apiResponse(true, 'HomePage updated successfully', $this->transformRoom($room), 201);
     }
 
     public function destroy($id)
@@ -94,7 +94,7 @@ class RoomAdmin extends Controller
         if ($room == null) {
             return ApiResponseClass::errorResponse('not_found', 'room is empty', 404);
         }
-        return ApiResponseClass::apiResponse(true, 'Room deleted successfully', $room->delete(), 200);
+        return ApiResponseClass::apiResponse(true, 'HomePage deleted successfully', $room->delete(), 200);
     }
 
 
