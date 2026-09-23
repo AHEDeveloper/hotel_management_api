@@ -12,4 +12,9 @@ class Reservation extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function reservationRoom()
+    {
+        return $this->hasMany(ReservationRoom::class);
+    }
 }

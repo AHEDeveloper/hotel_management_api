@@ -47,11 +47,10 @@ class AuthControllerClient extends Controller
     public function login(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'email' => 'required|email|unique:users,email',
+            'email' => 'required|email',
             'password' => 'required|string',
         ],[
             'email.email' => 'لطفاً یک ایمیل معتبر وارد کنید.',
-            'email.unique' => 'این ایمیل قبلاً ثبت شده است.',
 
             'password.string' => 'رمز عبور باید به صورت متن باشد.',
         ]);

@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Client\V1;
 
 use App\Classes\ApiResponseClass;
 use App\Http\Controllers\Controller;
+use App\Models\Room;
 use Illuminate\Http\Request;
 
 class RoomControllerClient extends Controller
 {
     public function index(Request $request)
     {
-        $query = RoomControllerClient::query()->with(['roomType','amenityRoom' => function ($q) {
+        $query = Room::query()->with(['roomType','amenityRoom' => function ($q) {
             $q->with('amenity:id,name');
         }]);
 
