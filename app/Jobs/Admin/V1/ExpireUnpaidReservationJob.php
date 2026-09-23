@@ -25,13 +25,13 @@ class ExpireUnpaidReservationJob implements ShouldQueue
             $this->reservation->status == 'cancelled'
         ) {return;}
 
-        if ($this->reservation->olderThen(minutes: 10)){
+        if ($this->reservation->olderThen(minutes: 5)){
             $service->send(
                 $this->phone,
-                'قربان رزرو شما از 10 دقیق بیشتر شده اگر تا 10 دقیقه دیگر رزرو خود را پرداخت نکنید کنسل میشود'
+                'این پیامک جهت تست وب سرویس لاراولی میباشد'
             );
         }
-        if ($this->reservation->olderThen(minutes: 20)){
+        if ($this->reservation->olderThen(minutes: 10)){
             $this->reservation->cancel();
             return;
         }
