@@ -4,48 +4,58 @@ namespace App\Http\Controllers\Client\V1;
 
 use App\Classes\ApiResponseClass;
 use App\Http\Controllers\Controller;
+use App\Jobs\Admin\V1\ExpireUnpaidReservationJob;
 use App\Models\Reservation;
 use App\Models\ReservationRoom;
 use App\Models\ReservationService;
 use App\Models\Room;
 use App\Models\RoomType;
 use App\Service\Client\V1\ReservationServiceClient;
+use App\Service\Ghasedak\smsService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+use function Illuminate\Support\minutes;
 
 class ReservationControllerClient extends Controller
 {
 
-    public function index()
+    public function index(smsService $service)
     {
-        $reservations = Reservation::query()
-            ->where('user_id', Auth::id())
-            ->with('reservationRoom.room')
-            ->get();
+        $result = $service->send(
+            '09165389234',
+            'سلام'
+        );
 
-        $items = $reservations->map(function ($reservation) {
-            return [
-                'id' => $reservation->id,
-                'check_in' => $reservation->check_in,
-                'check_out' => $reservation->check_out,
-                'total_price' => $reservation->total_price,
-                'status' => $reservation->status,
-
-                'reservationRoom' => $reservation->reservationRoom->map(function ($reservationRoom) {
-                    return [
-                        'room_id' => $reservationRoom->room_id,
-                        'price' => $reservationRoom->price,
-                        'room' => [
-                            'id' => $reservationRoom->room->id,
-                            'room_number' => $reservationRoom->room->room_number,
-                            'price' => $reservationRoom->room->roomType->price_per_night,
-                            'type' => $reservationRoom->room->roomType->name,
-                        ],
-                    ];
-                }),
-            ];
-        });
-        return ApiResponseClass::apiResponse(true,'reservation retrieved successfully',$items,200);
+        return response()->json($result);
+//        $reservations = Reservation::query()
+//            ->where('user_id', Auth::id())
+//            ->with('reservationRoom.room')
+//            ->get();
+//
+//        $items = $reservations->map(function ($reservation) {
+//            return [
+//                'id' => $reservation->id,
+//                'check_in' => $reservation->check_in,
+//                'check_out' => $reservation->check_out,
+//                'total_price' => $reservation->total_price,
+//                'status' => $reservation->status,
+//
+//                'reservationRoom' => $reservation->reservationRoom->map(function ($reservationRoom) {
+//                    return [
+//                        'room_id' => $reservationRoom->room_id,
+//                        'price' => $reservationRoom->price,
+//                        'room' => [
+//                            'id' => $reservationRoom->room->id,
+//                            'room_number' => $reservationRoom->room->room_number,
+//                            'price' => $reservationRoom->room->roomType->price_per_night,
+//                            'type' => $reservationRoom->room->roomType->name,
+//                        ],
+//                    ];
+//                }),
+//            ];
+//        });
+//        return ApiResponseClass::apiResponse(true,'reservation retrieved successfully',$items,200);
     }
 
     public function store(Request $request)
@@ -89,6 +99,7 @@ class ReservationControllerClient extends Controller
             $reservation->update([
                 'total_price' => $sumPrice
             ]);
+            ExpireUnpaidReservationJob::dispatch($reservation,$user->phone)->delay(now()->addSecond(1));
             return ApiResponseClass::apiResponse(true,'update reservation successfully',$this->transformReservation($reservation,$room),200);
         }
 

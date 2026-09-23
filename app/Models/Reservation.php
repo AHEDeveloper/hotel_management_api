@@ -17,4 +17,14 @@ class Reservation extends Model
     {
         return $this->hasMany(ReservationRoom::class);
     }
+
+    public function olderThen(int $minutes) : bool
+    {
+        return $this->updated_at->diffInMinutes(now()) > $minutes;
+    }
+
+    public function cancel()
+    {
+        return $this->update(['status' => 'cancelled']);
+    }
 }

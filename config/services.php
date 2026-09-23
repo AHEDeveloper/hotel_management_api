@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'ghasedak' => [
+        'api_key' => env('GHASEDAK_API_KEY'),
+        'line_number' => env('GHASEDAK_LINE_NUMBER'),
+    ],
+
 ];
