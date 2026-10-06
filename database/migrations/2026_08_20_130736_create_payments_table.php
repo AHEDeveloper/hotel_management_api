@@ -17,7 +17,9 @@ return new class extends Migration
             $table->enum('status',['pending','completed','cancelled','confirmed']);
             $table->string('transaction_id')->nullable()->unique();
             $table->timestamp('paid_at')->nullable();
+            $table->string('payment_gateway')->nullable();
             $table->foreignId('reservation_id')->constrained()->cascadeOnDelete();
+
 
             $table->timestamps();
         });

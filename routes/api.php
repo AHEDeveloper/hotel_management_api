@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Client\V1\AuthControllerClient;
 use App\Http\Controllers\Client\V1\HomePage as HomePage;
+use App\Http\Controllers\Client\V1\PaymentControllerClient;
 use App\Http\Controllers\Client\V1\ReservationControllerClient;
 use App\Http\Controllers\Client\V1\RoomControllerClient as RoomPage;
 use Illuminate\Support\Facades\Route;
@@ -24,8 +25,9 @@ Route::prefix('v1')->group(function (){
         Route::get('/reservation',[ReservationControllerClient::class,'index']);
         Route::delete('/reservation/{reservation}',[ReservationControllerClient::class,'deleteReservation']);
         Route::delete('/reservationRoom/{reservationRoom}',[ReservationControllerClient::class,'deleteReservationRoom']);
-
+        Route::post('/payment/{reservation}/',[PaymentControllerClient::class,'start'])->name('payment.start');
     });
+    Route::get('/payment/callback/{payment}/',[PaymentControllerClient::class,'callback'])->name('payment.callback');
 
 
 });
